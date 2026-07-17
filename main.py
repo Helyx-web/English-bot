@@ -4,7 +4,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler
 from vocab_data import seed
 from dotenv import load_dotenv
 load_dotenv()
-TOKEN = os.getenv("BOT_TOKEN", "PASTE_TOKEN_LU_SINI")
+TOKEN = os.getenv("BOT_TOKEN", "8874522391:AAGVoJJd1GXpINm-oToQ3MxgYUZ-0TlBNh0")
 def db():
  c=sqlite3.connect('vocab.db');c.row_factory=sqlite3.Row;return c
   def m_kb():
