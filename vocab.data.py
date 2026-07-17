@@ -98,13 +98,12 @@ D=[("apple","apel","/aepl/","I eat apple","Saya makan apel","Noun","A1"),
 ("hospital","rumah sakit","/hospital/","Go hospital","Ke rumah sakit","Noun","A2"),
 ("money","uang","/mani/","Save money","Menabung","Noun","A2"),
 ("weather","cuaca","/wedr/","Good weather","Cuaca bagus","Noun","A2")]
+import sqlite3
 def seed():
- import sqlite3
- db=sqlite3.connect('vocab.db')
- c=db.cursor()
- c.execute('CREATE TABLE IF NOT EXISTS vocabulary (id INTEGER PRIMARY KEY, word TEXT, meaning TEXT, pron TEXT, example TEXT, ex_m TEXT, pos TEXT, level TEXT)')
- c.execute('SELECT COUNT(*) FROM vocabulary')
- if c.fetchone()[0]==0:
-  c.executemany('INSERT INTO vocabulary (word,meaning,pron,example,ex_m,pos,level) VALUES (?,?,?,?,?,?,?)',D)
-  db.commit()
- db.close()
+ c=sqlite3.connect('vocab.db')
+ cu=c.cursor()
+ cu.execute('CREATE TABLE IF NOT EXISTS vocabulary (word TEXT, meaning TEXT, pron TEXT, example TEXT, ex_m TEXT, pos TEXT, level TEXT)')
+ if cu.execute('SELECT COUNT(*) FROM vocabulary').fetchone()[0]==0:
+  cu.executemany('INSERT INTO vocabulary VALUES (?,?,?,?,?,?,?)', [(x[0],x[1],x[2],x[3],x[4],x[5],x[6]) for x in v])
+  c.commit()
+ c.close()
